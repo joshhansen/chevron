@@ -32,6 +32,9 @@ else:  # python 2
 # Helper functions
 #
 
+class TemplateError(BaseException):
+    pass
+
 def _html_escape(string):
     """HTML escape all of these " & < >"""
 
@@ -96,7 +99,7 @@ def _get_key(key, scopes, warn=False):
     # We couldn't find the key in any of the scopes
 
     if warn:
-        sys.stderr.write("Could not find key '%s'%s" % (key, linesep))
+        raise TemplateError("Missing a value for key '%s'" % (key, ))
 
     return ''
 
